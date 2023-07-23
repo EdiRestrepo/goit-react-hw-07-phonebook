@@ -2,8 +2,11 @@ import ContactForm from "./components/ContactForm/ContactForm";
 import ContactList from "./components/ContactList/ContactList";
 import { Container, Paper } from "@mui/material";
 import Filter from "./components/Filter/Filter";
+import { useSelector } from "react-redux";
 
 const App = () => {
+
+  const {isLoading, error} = useSelector((state) => state.contacts)
 
   return (
     <Container>
@@ -26,7 +29,8 @@ const App = () => {
           <h2 style={{ display: "flex", justifyContent: "center" }}>
             Contacts
           </h2>
-          <Filter/>
+          <Filter />
+          {isLoading && !error && <p>Feching data...</p>}
           <ContactList/>
         </Paper>
       </Paper>
