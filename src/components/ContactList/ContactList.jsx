@@ -1,13 +1,15 @@
-import { getContacts, getFilter } from "../../redux/selectors";
-import { deleteContact } from "../../redux/contactsSlice";
+import { selectAllContacts, SelectFilter } from "../../redux/selectors";
+import { deleteContact } from "../../redux/operations";
 import { useSelector, useDispatch } from "react-redux";
 import DeleteIcon from "@mui/icons-material/Delete";
 import css from "./ContactList.module.css";
 import { IconButton } from "@mui/material";
+import { useEffect } from "react";
+import { fetchContacts } from "../../redux/operations";
 
 export const ContactList = () => {
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
+  const contacts = useSelector(selectAllContacts);
+  const filter = useSelector(SelectFilter);
   const dispatch = useDispatch();
 
   const deleteId = (contacts) => {
@@ -19,14 +21,18 @@ export const ContactList = () => {
     return newArr;
   };
 
+  useEffect(() => {
+    dispatch(fetchContacts());
+  },[dispatch])
+
   return (
     <div>
       <ul>
-        {filterArr(contacts)?.map(({ name, number, id }) => {
+        {filterArr(contacts)?.map(({ name, phone, id }) => {
           return (
             <div className={css["container-contact"]} key={id}>
               <li>
-                {name}: {number}
+                {name}: {phone}
               </li>
               <IconButton
                 className={css["delete-contact"]}

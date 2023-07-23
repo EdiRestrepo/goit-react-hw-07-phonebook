@@ -5,24 +5,6 @@ import Filter from "./components/Filter/Filter";
 
 const App = () => {
 
-  // Loading contacts from local storage
-  // useEffect(() => {
-    
-  //   const savedContacts = localStorage.getItem("contacts");
-  //   const parsedContacts = JSON.parse(savedContacts);
-  //   if (parsedContacts?.length) {
-  //     setContacts([...parsedContacts]);
-  //   }
-  // }, []);
-
-  // Saving contacts to local storage
-  // useEffect(() => {
-  //   if (!isFirstRender.current) {
-  //     window.localStorage.setItem("contacts", JSON.stringify(contacts));
-  //   }
-  //   isFirstRender.current = false;
-  // }, [contacts]);
-
   return (
     <Container>
       <Paper
